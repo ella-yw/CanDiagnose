@@ -1,0 +1,138 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DetectTimely</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{% static 'home/logo.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'home/logo.png' %}" type="image/x-icon">
+	
+	<!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{% static 'home/css/animate.css' %}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{% static 'home/css/icomoon.css' %}">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="{% static 'home/css/themify-icons.css' %}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/owl.theme.default.min.css' %}">
+	<!-- Flexslider -->
+	<link rel="stylesheet" href="{% static 'home/css/flexslider.css' %}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'home/js/modernizr-2.6.2.min.js' %}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<style>
+		#fnac {
+			background-image: url("{% static 'home/img/fnac.jpg' %}");
+		}
+		#pathology {
+			background-image: url("{% static 'home/img/pathology.jpg' %}");
+		}
+		#mammography {
+			background-image: url("{% static 'home/img/mammography.png' %}");
+		}
+		#histology {
+			background-image: url("{% static 'home/img/histology.jpg' %}");
+		}
+	</style>
+
+	</head>
+	<body>
+	<nav class="ubea-nav" role="navigation" style="padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;background-color:#f1f1f1">
+		<div class="ubea-container" style="padding:0px 0px 0px 10px; margin:0px 0px 0px 0px;">
+			<div class="row">
+				<div id="ubea-logo"><a href="/"> &nbsp; <span style='color:grey;font-weight:500;text-transform:none;font-family:Courier;font-size:32px;word-spacing:1px;'> <b>DetectTimely</b><a style="color:blue;font-family:Courier;text-decoration:underline;" href="http://omagarwal.net">(View Internationally Published Research)</a></span></a></div>
+			</div>
+			
+		</div>
+	</nav>
+	<div class="ubea-loader"></div>
+	
+	<div id="page">
+
+	<div id="ubea-hero" class="js-fullheight"  data-section="home">
+		<div class="flexslider js-fullheight">
+			<ul class="slides">
+		   	<li id='histology'>
+		   		<div class="overlay"></div>
+		   		<div class="container">
+		   			<div class="col-md-10 col-md-offset-1 text-center js-fullheight slider-text">
+		   				<div class="slider-text-inner">
+		   					<p><a href="/hist/" target="_blank" class="btn btn-primary btn-lg">HISTOLOGY</a></p>
+		   				</div>
+		   			</div>
+		   		</div>
+		   	</li>
+		   	<li id='mammography'>
+		   		<div class="overlay"></div>
+		   		<div class="container">
+		   			<div class="col-md-10 col-md-offset-1 text-center js-fullheight slider-text">
+		   				<div class="slider-text-inner">
+		   					<p><a href="/mamm/" target="_blank" class="btn btn-primary btn-lg">MAMMOGRAPHY</a></p>
+		   				</div>
+		   			</div>
+		   		</div>
+		   	</li>
+			<li id = 'pathology'>
+		   		<div class="overlay"></div>
+		   		<div class="container">
+		   			<div class="col-md-10 col-md-offset-1 text-center js-fullheight slider-text">
+		   				<div class="slider-text-inner">
+		   					<p><a href="/cypt/" target="_blank" class="btn btn-primary btn-lg">CYTOPATHOLOGY</a></p>
+		   				</div>
+		   			</div>
+		   		</div>
+		   	</li>
+			<li id = 'fnac'>
+		   		<div class="overlay"></div>
+		   		<div class="container">
+		   			<div class="col-md-10 col-md-offset-1 text-center js-fullheight slider-text">
+		   				<div class="slider-text-inner">
+		   					<p><a href="/fnac/" target="_blank" class="btn btn-primary btn-lg">FINE-NEEDLE ASPIRATION</a></p>
+		   				</div>
+		   			</div>
+		   		</div>
+		   	</li>
+		  	</ul>
+	  	</div>
+	</div>
+
+	
+	</div>
+	<!-- jQuery -->
+	<script src="{% static 'home/js/jquery.min.js' %}"></script>
+	<!-- jQuery Easing -->
+	<script src="{% static 'home/js/jquery.easing.1.3.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'home/js/jquery.waypoints.min.js' %}"></script>
+	<!-- Carousel -->
+	<script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+	<!-- countTo -->
+	<script src="{% static 'home/js/jquery.countTo.js' %}"></script>
+	<!-- Flexslider -->
+	<script src="{% static 'home/js/jquery.flexslider-min.js' %}"></script>
+	<!-- Magnific Popup -->
+	<script src="{% static 'home/js/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'home/js/magnific-popup-options.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'home/js/main.js' %}"></script>
+
+	</body>
+</html>
+

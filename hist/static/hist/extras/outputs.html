@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Output Derivations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="../logo.png" type="image/x-icon">
+<link rel="icon" href="../logo.png" type="image/x-icon">
+
+</head>
+<body style="font-family:Courier;font-weight:bold;text-align:center;">
+<span style="font-size:15px;text-align:center;font-weight:100">***Note: All computations and metrics have been calculated on the validation set of <b>55,504 histology patches (20% of overall dataset consisting of 277,524 histology patches)</b></span>
+<br/><h1>Accuracy: 84.45458000760168%</h1>
+<div style="font-size:20px;font-weight:100;line-height:15px;"><span style = "background-color:#ffdae0">&nbsp;Computed Area Under the Receiver Operating Characteristic Curve (ROC AUC): <b>84.45458000760167%</b>&nbsp;</span></div>
+
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><br/><span style = "background-color:crimson;color:white">&nbsp;Brier Score/Hamming Loss/Zero-One Classification Loss: <b>0.15545419992398327</b>&nbsp;</span></div>
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><span style = "background-color:crimson;color:white">&nbsp;Average Hinge Loss (Non-Regularized): <b>0.6554541999239832</b>&nbsp;</span></div>
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><span style = "background-color:crimson;color:white">&nbsp;Logistic/Crossentropy Loss: <b>5.369261571435324</b>&nbsp;</span></div>
+
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><br/><span style = "background-color:indigo;color:white">&nbsp;Cohen’s Kappa (Inter-Annotator Agreement): <b>68.90916001520335%</b>&nbsp;</span></div>
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><span style = "background-color:indigo;color:white">&nbsp;Jaccard Index/Similarity Coefficient: <b>84.45458000760168%</b>&nbsp;</span></div>
+<div style="font-size:20px;font-weight:100;line-height:15px;"><br/><span style = "background-color:indigo;color:white">&nbsp;Matthews Correlation Coefficient: <b>68.91128602975093%</b>&nbsp;</span></div>
+
+<br/><br/><br/>
+<img src="acc_loss.png" style="width:50%;float:left"/>
+<img src="epochs_accuracy.png" style="width:50%;float:left;margin-bottom:50px;"/>
+<br/><br/>
+<img src="cnf_mtx.png" style="width:50%;float:left"/>
+<img src="clsf_rep.png" style="width:50%;float:left;margin-bottom:20px;"/>
+</body>
+</html>

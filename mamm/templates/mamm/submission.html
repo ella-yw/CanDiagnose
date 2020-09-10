@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mammogram</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="{% static 'mamm/logo.png' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'mamm/logo.png' %}" type="image/x-icon">
+<script>
+function display(elem) {
+	document.getElementById('title').innerHTML = document.getElementById("filter" + elem.innerHTML).innerHTML;
+	document.getElementById('images').innerHTML = document.getElementById("url" + elem.innerHTML).innerHTML;
+}
+</script>
+</head>
+<body style="font-family:Courier;font-weight:bold;text-align:center;">
+<br/>
+<!-- START PREDICTIONS -->
+<div style="text-align:center;padding-top:10px;">
+<span style="font-size:70px;">{{ y_pred }}</span><br/><span style="font-size:35px;">[PBD: {{ pbd }}% (Categorized - {{ categorized_pbd }}) | BIRADS5: {{ birads5 }}]</span><br/><br/></div>
+<!-- END PREDICTIONS -->
+
+<!-- START LAYERS LINKS -->
+<span style="text-decoration:underline;"><b>{{ density }} MODEL</b><span style="font-weight:100"> - VISUALIZABLE LAYERS</span></span>
+<br/><br/>
+{% for i in filters %}
+	<a onclick="display(this)" style="cursor:pointer">{{forloop.counter}}</a>
+{% endfor %}
+<br/>
+<!-- END LAYERS LINKS -->
+
+<!-- START INITIAL FIRST LAYER IMGS -->
+<br/><br/>
+<div id = "title"><span style="font-weight:100">Showing filters/feature maps generated in</span> Layer 1 <span style="font-weight:100">(Total #: <span style="font-weight:bold">{{ filters.0|length }})</span></span></div>
+<div id = "images" style = "margin-top:20px;">
+{% for j in filters.0 %}
+	<img src="{% static "mamm/visualizations/layer-1" %}/{{j}}.jpg" style="width:50px;float:left;margin-right:5px;margin-bottom:5px;">
+{% endfor %}
+</div>
+<!--  END INITIAL FIRST LAYERS IMGS -->
+
+<!-- START ALL LAYER IMGS IN BACKGROUND -->
+<div style="display:none">
+{% for i in filters %}
+	<span id="filter{{forloop.counter}}"><span style="font-weight:100">Showing filters/feature maps generated in</span> Layer {{forloop.counter}} <span style="font-weight:100">(Total #: <span style="font-weight:bold">{{ i|length }})</span></span></span>
+	<div id="url{{forloop.counter}}">
+	{% for j in i %}     
+		<span style="font-weight:bold"><img src="{% static "mamm/visualizations/layer-" %}{{forloop.parentloop.counter}}/{{j}}.jpg" style="width:50px;float:left;margin-right:5px;margin-bottom:5px;"></span>
+	{% endfor %}
+	</div>
+{% endfor %}
+</div>
+<!--  END ALL LAYERS IMGS -->
+</body>
+</html>

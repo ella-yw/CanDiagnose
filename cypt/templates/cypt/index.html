@@ -1,0 +1,370 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cytopathology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="{% static 'cypt/logo.png' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'cypt/logo.png' %}" type="image/x-icon">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'cypt/style.css' %}">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type='text/javascript'>
+	
+	//THIS FUNCTION IS NOT IN USE
+	
+	function validate() {
+		RadiusMean = document.getElementById("RadiusMean").value;
+		TextureMean = document.getElementById("TextureMean").value;
+		PerimeterMean = document.getElementById("PerimeterMean").value;
+		AreaMean = document.getElementById("AreaMean").value;
+		SmoothnessMean = document.getElementById("SmoothnessMean").value;
+		CompactnessMean = document.getElementById("CompactnessMean").value;
+		ConcavityMean = document.getElementById("ConcavityMean").value;
+		ConcavePointsMean = document.getElementById("ConcavePointsMean").value;
+		SymmetryMean = document.getElementById("SymmetryMean").value;
+		FractalDimensionMean = document.getElementById("FractalDimensionMean").value;
+		
+		RadiusSE = document.getElementById("RadiusSE").value;
+		TextureSE = document.getElementById("TextureSE").value;
+		PerimeterSE = document.getElementById("PerimeterSE").value;
+		AreaSE = document.getElementById("AreaSE").value;
+		SmoothnessSE = document.getElementById("SmoothnessSE").value;
+		CompactnessSE = document.getElementById("CompactnessSE").value;
+		ConcavitySE = document.getElementById("ConcavitySE").value;
+		ConcavePointsSE = document.getElementById("ConcavePointsSE").value;
+		SymmetrySE = document.getElementById("SymmetrySE").value;
+		FractalDimensionSE = document.getElementById("FractalDimensionSE").value;
+		
+		RadiusWorst = document.getElementById("RadiusWorst").value;
+		TextureWorst = document.getElementById("TextureWorst").value;
+		PerimeterWorst = document.getElementById("PerimeterWorst").value;
+		AreaWorst = document.getElementById("AreaWorst").value;
+		SmoothnessWorst = document.getElementById("SmoothnessWorst").value;
+		CompactnessWorst = document.getElementById("CompactnessWorst").value;
+		ConcavityWorst = document.getElementById("ConcavityWorst").value;
+		ConcavePointsWorst = document.getElementById("ConcavePointsWorst").value;
+		SymmetryWorst = document.getElementById("SymmetryWorst").value;
+		FractalDimensionWorst = document.getElementById("FractalDimensionWorst").value;
+		
+		if 	(RadiusMean != "" && TextureMean != "" && PerimeterMean != "" && AreaMean != "" && SmoothnessMean != "" && CompactnessMean != "" 
+		&& ConcavityMean != "" && ConcavePointsMean != "" && SymmetryMean != "" && FractalDimensionMean != "" && RadiusSE != "" && TextureSE != "" 
+		&& PerimeterSE != "" && AreaSE != "" && SmoothnessSE != "" && CompactnessSE != "" && ConcavitySE != "" && ConcavePointsSE != "" 
+		&& SymmetrySE != "" && FractalDimensionSE != "" && RadiusWorst != "" && TextureWorst != "" && PerimeterWorst != "" && AreaWorst != "" 
+		&& SmoothnessWorst != "" && CompactnessWorst != "" && ConcavityWorst != "" && ConcavePointsWorst != "" && SymmetryWorst != "" && FractalDimensionWorst != "") {
+			
+			data = RadiusMean + ',' + TextureMean + ',' + PerimeterMean + ',' + AreaMean + ',' + SmoothnessMean + ',' + CompactnessMean + ',' 
+			+ ConcavityMean + ',' + ConcavePointsMean + ',' + SymmetryMean + ',' + RadiusSE + ',' + TextureSE + ',' + PerimeterSE + ',' + AreaSE 
+			+ ',' + SmoothnessSE + ',' + CompactnessSE + ',' + ConcavitySE + ',' + ConcavePointsSE + ',' + SymmetrySE + ',' + FractalDimensionSE 
+			+ ',' + RadiusWorst + ',' + TextureWorst + ',' + PerimeterWorst + ',' + AreaWorst + ',' + SmoothnessWorst + ',' + CompactnessWorst 
+			+ ',' + ConcavityWorst + ',' + ConcavePointsWorst + ',' + SymmetryWorst + ',' + FractalDimensionWorst;			
+			
+			alert("Recieved Inputs - Computing!!!\n\n" + data);
+			/*
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					 var pred = xmlhttp.responseText;
+					 alert(pred);
+				 }
+			};
+			xmlhttp.open("GET","core.php?data="+data,true);
+			xmlhttp.send(); 
+			*/
+		}
+		else {
+			alert("Please make sure to input all values!");
+		}
+	}
+</script>
+<script>
+function mod(){ location.href = "{% static 'cypt/extras/outputs.html' %}"; }
+function mst(){ location.href = "{% static 'cypt/extras/model_structure.png' %}"; }
+function msm(){ location.href = "{% static 'cypt/extras/model_summary.txt' %}"; }
+function mwt(){ location.href = "{% static 'cypt/extras/params/index.html' %}"; }
+function git(){ location.href = "https://github.com/om000developer/cell-nuclei-characteristics"; }
+</script>
+
+<style>
+button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+{% if y_pred|length != 0 %}
+	<script> alert("{{ y_pred }}"); </script>
+{% endif %}
+		
+</head>
+
+<body>
+<br/>
+<div class="agile-its">
+<!--<div style="text-align:center"><br/>
+							<button style="padding:3px;background-color:chocolate;width:89%;margin-bottom:5px;" onclick = 'mod()'>View Model's Output Derivations</button>
+							<button style="background-color:green" onclick = 'mst()'>Model Structure</button> 
+							<button style="background-color:palevioletred" onclick = 'msm()'>Model Summary</button> 
+							<button style="background-color:midnightblue" onclick = 'mwt()'>Model Weights</button>
+							<button style="padding:3px;background-color:slategray;width:89%;margin-top:5px;" onclick = 'git()'>View Github Code Repository</button>
+							</div> -->
+	<h2>Cell Nuclei Characteristics</h2>
+	<div class="w3layouts">
+		<div class="photos-upload-view">
+			<div class="agileinfo">
+			</div>
+			<form method='post'>
+				{% csrf_token %}
+				<div style="text-align:center">
+					<label id="heading"><button id='sep' disabled>MEAN</button></label>
+				</div><div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Radius</b></label>
+						{{ form.RadiusMean }}&nbsp;&nbsp;
+						</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Texture</b></label>
+						{{ form.TextureMean }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Perimeter</b></label>
+						{{ form.PerimeterMean }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Area</b></label>
+						{{ form.AreaMean }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Smoothness</b></label>
+						{{ form.SmoothnessMean }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Compactness</b></label>
+						{{ form.CompactnessMean }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Concavity</b></label>
+						{{ form.ConcavityMean }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>		
+						<div class="ferry ferry-from">
+						<label><b>Concave Points</b></label>
+						{{ form.ConcavePointsMean }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Symmetry</b></label>
+						{{ form.SymmetryMean }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Fractal Dimension</b></label>
+						{{ form.FractalDimensionMean }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div style="text-align:center">
+				<label id="heading"><button id='sep' disabled>ERROR</button></label>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Radius</b></label>
+						{{ form.RadiusSE }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Texture</b></label>
+						{{ form.TextureSE }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Perimeter</b></label>
+						{{ form.PerimeterSE }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Area</b></label>
+						{{ form.AreaSE }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Smoothness</b></label>
+						{{ form.SmoothnessSE }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Compactness</b></label>
+						{{ form.CompactnessSE }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Concavity</b></label>
+						{{ form.ConcavitySE }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>		
+					<div class="ferry ferry-from">
+						<label><b>Concave Points</b></label>
+						{{ form.ConcavePointsSE }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Symmetry</b></label>
+						{{ form.SymmetrySE }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Fractal Dimension</b></label>
+						{{ form.FractalDimensionSE }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div style="text-align:center">
+				<label id="heading"><button id='sep' disabled>WORST</button></label>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Radius</b></label>
+						{{ form.RadiusWorst }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Texture</b></label>
+						{{ form.TextureWorst }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Perimeter</b></label>
+						{{ form.PerimeterWorst }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Area</b></label>
+						{{ form.AreaWorst }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Smoothness</b></label>
+						{{ form.SmoothnessWorst }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Compactness</b></label>
+						{{ form.CompactnessWorst }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Concavity</b></label>
+						{{ form.ConcavityWorst }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>		
+						<div class="ferry ferry-from">
+						<label><b>Concave Points</b></label>
+						{{ form.ConcavePointsWorst }}&nbsp;&nbsp;
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Symmetry</b></label>
+						{{ form.SymmetryWorst }}&nbsp;&nbsp;
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row" style='float:left'>
+					<div class="ferry ferry-from">
+						<label><b>Fractal Dimension</b></label>
+						{{ form.FractalDimensionWorst }}&nbsp;&nbsp;
+					</div>
+					<div class="clear"></div>
+				</div>
+			<div class="wthree-text"> 
+				<div class="wthreesubmitaits">
+					<input type="submit" name="predict" value="Predict Malignancy Vs. Benignity">
+				</div>
+			</form>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="footer">
+	<p style="padding-bottom:20px;"> © DetectTimely  | Design by  <a href="http://www.omagarwal.net/"> Om Agarwal</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mammogram</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="{% static 'mamm/logo.png' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'mamm/logo.png' %}" type="image/x-icon">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'mamm/style.css' %}">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- File Input -->
+<link rel="stylesheet" type="text/css" href="{% static 'mamm/file_input/css/normalize.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'mamm/file_input/css/demo.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'mamm/file_input/css/component.css' %}" />
+
+<script>
+function mod(){ location.href = "{% static 'mamm/extras/outputs.html' %}"; }
+function mst(){ location.href = "{% static 'mamm/extras/model_structure.png' %}"; }
+function msm(){ location.href = "{% static 'mamm/extras/model_summary.txt' %}"; }
+function mwt(){ location.href = "{% static 'mamm/extras/params/index.html' %}"; }
+function git(){ location.href = "https://github.com/om000developer/percent-based-density"; }
+</script>
+
+<script>
+function hide_show() {
+	if (document.getElementById("chk").checked == true) { document.querySelector("#specify_model").style.display = "block"; }
+	else { document.querySelector("#specify_model").style.display = "none"; }
+}
+</script>
+
+<style>
+button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+
+{% if y_pred|length != 0 %}
+	<script> alert("{{ y_pred }} [PBD: {{ pbd }}% (Categorized - {{ categorized_pbd }}) | BIRADS5: {{ birads5 }}]"); </script>
+{% endif %}
+		
+</head>
+<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+	
+<body>
+<br/>
+<div class="agile-its">
+<!--<div style="text-align:center"><br/>
+										<button style="padding:3px;background-color:chocolate;width:89%;margin-bottom:5px;" onclick = 'mod()'>View Model's Output Derivations</button>
+										<button style="background-color:green" onclick = 'mst()'>Model Structure</button> 
+										<button style="background-color:palevioletred" onclick = 'msm()'>Model Summary</button> 
+										<button style="background-color:midnightblue" onclick = 'mwt()'>Model Weights</button>
+										<button style="padding:3px;background-color:slategray;width:89%;margin-top:5px;" onclick = 'git()'>View Github Code Repository</button>
+										</div>--><div style="padding-top:7px;"></div>
+	<span style='text-align:center;'><h1>Mammographic Malignancy Discrimination:</h1><div style='font-size:14px;color:white;padding:0px 10px 10px 10px;'><b>OUTPUT:</b> Malignancy/No Malignancy Detection w/ Percent-Based Density (PBD) & Breast Imaging Reporting and Data System (BI-RADS5)</div></span>
+	<div class="w3layouts">
+		<div class="photos-upload-view">
+			<div class="agileinfo">
+			</div>
+			<form method='post' enctype="multipart/form-data">
+			<style type="text/css">     
+				select {
+					width:100%;
+					font-size:12px;
+					margin:0 auto;
+					margin-bottom:12px;
+				}
+			</style>
+				{% csrf_token %}
+				<div style="text-align:center">
+					<label id="heading"><button id='sep' disabled>IMAGE</button></label>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from" style = 'text-align:center'>
+						<!--<input type="file" id="id_file" class="inputfile inputfile-5" style='display:none'/>-->
+						{{ form.file }}
+						<label for="id_file" style = 'margin-bottom:0px;'><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span style='font-weight:500'>UPLOAD MAMMOGRAM</span></label>
+						<br/><span style = "color:white">::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</span><br/><br/>
+						<span style="font-size:20px;color:white;font-weight:500">VISUALIZE INTERMEDIARY MODEL LAYERS: <br/></span><span style="font-size:12px;color:white">(Takes a longer amount of time to load results)</span>
+						<div style="padding-top:20px;color:white">{{ form.visualize }}
+						<div style="font-size:18px;color:white;padding-top:20px;display:none" id = 'specify_model'>
+						<b style="font-size:16px;text-decoration:underline">If CHECKED, FOR WHICH MODEL?</b><br/><br/>
+						<div style="font-size:25px;padding-bottom:10px">{{ form.density }}</div></div></div>
+				<div class="clear"></div>
+				</div>
+				
+			<div class="wthree-text"> 
+				<div class="wthreesubmitaits">
+					<input type="submit" name="predict" value="Predict IDC Vs. Non-IDC">
+				</div>  
+			</div>
+			</form>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<script src="{% static 'mamm/file_input/js/custom-file-input.js' %}"></script>
+
+<div class="footer">
+	<p style="padding-bottom:20px;"> © DetectTimely  | Design by  <a href="http://www.omagarwal.net/"> Om Agarwal</a></p>
+</div>
+</body>
+</html>

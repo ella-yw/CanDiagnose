@@ -1,0 +1,10 @@
+
+::::::::::::::::: OVERALL OUTPUT DERIVATIONS :::::::::::::::::
+
+Accuracy: 0.971428571429%
+
+Categorized Accuracies: Benignity: 0.966101694915% | Malignancy: 0.982456140351% 
+
+Cohen's Kappa Co-efficient (K): 0.935826916025
+
+Area Under the Curve (AUC): 0.970636336604

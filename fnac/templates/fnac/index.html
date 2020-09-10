@@ -1,0 +1,146 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>FNA Cytology</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="{% static 'fnac/logo.png' %}" type="image/x-icon">
+<link rel="icon" href="{% static 'fnac/logo.png' %}" type="image/x-icon">
+	
+<link rel="stylesheet" type="text/css" href="{% static 'fnac/style.css' %}">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function mod(){ location.href = "{% static 'fnac/extras/outputs.html' %}"; }
+function mst(){ location.href = "{% static 'fnac/extras/model_structure.png' %}"; }
+function msm(){ location.href = "{% static 'fnac/extras/model_summary.txt' %}"; }
+function mwt(){ location.href = "{% static 'fnac/extras/params/index.html' %}"; }
+function git(){ location.href = "https://github.com/om000developer/fine-needle-aspiration-cytology"; }
+</script>
+
+<style>
+button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+{% if y_pred|length != 0 %}
+	<script> alert("{{ y_pred }}"); </script>
+{% endif %}
+		
+</head>
+
+<body>
+<br/>
+<div class="agile-its">
+<!--<div style="text-align:center"><br/>
+							<button style="padding:3px;background-color:chocolate;width:89%;margin-bottom:5px;" onclick = 'mod()'>View Model's Output Derivations</button>
+							<button style="background-color:green" onclick = 'mst()'>Model Structure</button> 
+							<button style="background-color:palevioletred" onclick = 'msm()'>Model Summary</button> 
+							<button style="background-color:midnightblue" onclick = 'mwt()'>Model Weights</button>
+							<button style="padding:3px;background-color:slategray;width:89%;margin-top:5px;" onclick = 'git()'>View Github Code Repository</button>
+							</div>-->
+	<h2>Fine-Needle Aspiration</h2>
+	<div class="w3layouts">
+		<div class="photos-upload-view">
+			<div class="agileinfo">
+			</div>
+			<form method='post'>
+			<style type="text/css">     
+				select {
+					width:100%;
+					font-size:12px;
+					margin:0 auto;
+					margin-bottom:12px;
+				}
+			</style>
+				{% csrf_token %}
+				<div style="text-align:center">
+					<label id="heading"><button id='sep' disabled>RANGES</button></label>
+				</div><div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Clump Thickness</b></label>
+						{{ form.ClumpThickness }}
+						</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Uniformity of Cell Size</b></label>
+						{{ form.UniformityofCellSize }}
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Uniformity of Cell Shape</b></label>
+						{{ form.UniformityofCellShape }}
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Marginal Adhesion</b></label>
+						{{ form.MarginalAdhesion }}
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Single Epithelial Cell Size</b></label>
+						{{ form.SingleEpithelialCellSize }}
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Bare Nuclei</b></label>
+						{{ form.BareNuclei }}
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Bland Chromatin</b></label>
+						{{ form.BlandChromatin }}
+					</div>
+				<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">		
+						<div class="ferry ferry-from">
+						<label><b>Normal Nucleoli</b></label>
+						{{ form.NormalNucleoli }}
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div class="agileinfo-row">
+					<div class="ferry ferry-from">
+						<label><b>Mitoses</b></label>
+						{{ form.Mitoses }}
+					</div>
+				<div class="clear"></div>
+				</div>
+			<div class="wthree-text"> 
+				<div class="wthreesubmitaits">
+					<input type="submit" name="predict" style = "width:100%;" value="Predict Malignancy Vs. Benignity">
+				</div>
+			</form>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="footer">
+	<p style="padding-bottom:20px;"> © DetectTimely  | Design by  <a href="http://www.omagarwal.net/"> Om Agarwal</a></p>
+</div>
+</body>
+</html>
